@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/features/challange_one/splash_screen/splash_screen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -9,6 +10,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+
+        builder: (context, child) {
+          return SplashScreen();
+        },
+    );
   }
 }
