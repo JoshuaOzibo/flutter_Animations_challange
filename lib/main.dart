@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/features/challange_one/onboarding_screens/onboarding_one.dart';
 import 'package:flutter_animations/features/challange_one/splash_screen/splash_screen.dart';
 
 void main(){
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        builder: (context, child) {
-          return SplashScreen();
+        builder: (context, child) { // SplashScreen();
+          return OnboardingOne();
         },
     );
   }
