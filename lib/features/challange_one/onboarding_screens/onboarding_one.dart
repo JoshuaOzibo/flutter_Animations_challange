@@ -9,7 +9,7 @@ class OnboardingOne extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            'assets/images/cow_image.png',
+            'images/cow_image.png',
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
@@ -29,40 +29,74 @@ class OnboardingOne extends StatelessWidget {
           ),
 
           Positioned(
-            bottom: 150,
+            top: 50,
+            left: 0,
+            right: 30,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Text('Skip', style: TextStyle(color: Colors.white), textAlign: TextAlign.end,))
+          ),
+
+          Positioned(
+            bottom: 240,
             left: 0,
             right: 0,
-            child: 
-              Row(
-                spacing: 5,
-                children: [
-                  Container(
-                    width: 20,
-                    height: 2,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                  Container(
-                    width: 20,
-                    height: 2,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                  Container(
-                    width: 20,
-                    height: 2,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                ],
-              )
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Luxury Beauty Redefined', style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold
+                ),),
+
+                SizedBox(height: 10,),
+                Text(
+                  'Experiance the finest in beauty craftmanship with our curated selection of premium services and world-class professionals',
+                   style: TextStyle(
+                  color: Colors.white
+                ),
+                ),
+              ],
             ),
+          ),
+
+          Positioned(
+            bottom: 150,
+            left: 180,
+            right: 0,
+            child: Row(
+              spacing: 5,
+              children: [
+                Container(
+                  width: 20,
+                  height: 2,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                Container(
+                  width: 20,
+                  height: 2,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                Container(
+                  width: 20,
+                  height: 2,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+              ],
+            ),
+          ),
 
           Positioned(
             bottom: 30,
