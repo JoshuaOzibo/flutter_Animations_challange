@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
 
 class OnboardingOne extends StatefulWidget {
   const OnboardingOne({super.key});
@@ -162,7 +163,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                        // TODO: Navigate to next screen (e.g., Home or Login)
+                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
                       }
                     },
                     style: ElevatedButton.styleFrom(
