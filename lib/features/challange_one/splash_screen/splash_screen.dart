@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -8,9 +11,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController controller;
+  late AnimationController scaleController;
+  late AnimationController listAnimationController;
+  late Animation<double> scaleAnimation;
   late Animation<Offset> circleSlideAnimation;
+  late Animation<Offset> circleTwoSlideAnimation;
+  late Animation<Offset> circleThreeSlideAnimation;
+  late List<Animation<Offset>> listAnimation;
+  bool isAnimationCompleted = false;
+  bool isListAnimationCompleted = false;
+
+  List<String> splashText = ['Fry', 'Beauty Appointment UI Kit'];
 
   @override
   void initState() {
@@ -18,15 +31,80 @@ class _SplashScreenState extends State<SplashScreen>
 
     controller = AnimationController(
       vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    scaleController = AnimationController(
+      vsync: this,
       duration: const Duration(milliseconds: 2000),
     );
 
+    listAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+
     circleSlideAnimation = Tween<Offset>(
-      begin: Offset(0, -1),
+      begin: Offset(0, -0.05),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: controller, curve: Curves.bounceIn));
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeIn));
+
+    circleTwoSlideAnimation = Tween<Offset>(
+      begin: Offset(-0.18, 0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeIn));
+
+    circleThreeSlideAnimation = Tween<Offset>(
+      begin: Offset(0, 0.08),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeIn));
+
+    scaleAnimation = Tween<double>(begin: 0.6, end: 1.3).animate(
+      CurvedAnimation(parent: scaleController, curve: Curves.bounceOut),
+    );
+
+    listAnimation = List.generate(
+      2,
+      (index) => Tween<Offset>(begin: Offset(0, 2), end: Offset.zero).animate(
+        CurvedAnimation(
+          parent: listAnimationController,
+          curve: Interval(index * (1 / 2), 1),
+        ),
+      ),
+    );
 
     controller.forward();
+    scaleController.forward();
+
+    scaleController.addListener(() {
+      if (scaleAnimation.isCompleted) {
+        setState(() {
+          isAnimationCompleted = true;
+          listAnimationController.forward();
+        });
+      }
+    });
+
+    listAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          isListAnimationCompleted = true;
+        });
+        Timer(const Duration(milliseconds: 1000), () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+          );
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+    scaleController.dispose();
+    listAnimationController.dispose();
   }
 
   @override
@@ -49,25 +127,31 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
           ),
-          Align(
-            alignment: const Alignment(-1.4, -0.7),
-            child: Container(
-              height: 150,
-              width: 150,
-              decoration: const BoxDecoration(
-                color: Colors.blueAccent,
-                shape: BoxShape.circle,
+          SlideTransition(
+            position: circleTwoSlideAnimation,
+            child: Align(
+              alignment: const Alignment(-1.4, -0.7),
+              child: Container(
+                height: 150,
+                width: 150,
+                decoration: const BoxDecoration(
+                  color: Colors.blueAccent,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),
-          Align(
-            alignment: const Alignment(0.8, 1.1),
-            child: Container(
-              height: 120,
-              width: 120,
-              decoration: const BoxDecoration(
-                color: Colors.blueAccent,
-                shape: BoxShape.circle,
+          SlideTransition(
+            position: circleThreeSlideAnimation,
+            child: Align(
+              alignment: const Alignment(0.8, 1.1),
+              child: Container(
+                height: 120,
+                width: 120,
+                decoration: const BoxDecoration(
+                  color: Colors.blueAccent,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),
@@ -77,24 +161,53 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                ScaleTransition(
+                  scale: scaleAnimation,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 500),
+                    opacity: isAnimationCompleted ? 1 : 0.5,
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                      ),
+                      child: const Icon(Icons.access_alarm, size: 40),
+                    ),
                   ),
-                  child: const Icon(Icons.access_alarm, size: 40),
                 ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Fry',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+
+                SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                    itemCount: splashText.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Center(
+                        child: SlideTransition(
+                          position: listAnimation[index],
+                          child: AnimatedOpacity(
+                            opacity: isAnimationCompleted ? 1 : 0,
+                            duration: const Duration(milliseconds: 1000),
+                            child: Text(
+                              splashText[index],
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                const SizedBox(height: 15),
-                const Text(
-                  'Beauty Appointment UI Kit',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
+
+                if (isListAnimationCompleted)
+                  CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+                  ),
               ],
             ),
           ),
