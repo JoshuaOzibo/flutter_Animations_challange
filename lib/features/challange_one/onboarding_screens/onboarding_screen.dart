@@ -2,14 +2,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
 
-class OnboardingOne extends StatefulWidget {
-  const OnboardingOne({super.key});
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
 
   @override
-  State<OnboardingOne> createState() => _OnboardingOneState();
+  State<OnboardingScreen> createState() => _OnboardingOneState();
 }
 
-class _OnboardingOneState extends State<OnboardingOne> {
+class _OnboardingOneState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
@@ -50,7 +50,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.8)
+                          Colors.black.withOpacity(0.8),
                         ],
                         stops: const [0.3, 1.0],
                       ),
@@ -150,7 +150,8 @@ class _OnboardingOneState extends State<OnboardingOne> {
                 Expanded(
                   child: const Text(
                     'Back',
-                    style: TextStyle(color: Colors.white, fontSize: 16,), textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(width: 15),
@@ -163,7 +164,41 @@ class _OnboardingOneState extends State<OnboardingOne> {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) {
+                                  return LoginScreen();
+                                },
+                            transitionsBuilder:
+                                (
+                                  context,
+                                  animation,
+                                  secondaryAnimation,
+                                  child,
+                                ) {
+                                  final slideAnimation =
+                                      Tween<Offset>(
+                                        begin: Offset(1, 0),
+                                        end: Offset.zero,
+                                      ).animate(
+                                        CurvedAnimation(
+                                          parent: animation,
+                                          curve: Curves.easeOut,
+                                        ),
+                                      );
+                                  return SlideTransition(
+                                    position: slideAnimation,
+                                    child: child,
+                                  );
+                                },
+
+                            transitionDuration: const Duration(
+                              milliseconds: 1000,
+                            ),
+                          ),
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -177,8 +212,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                       _currentIndex == onboardingItems.length - 1
                           ? 'Finish'
                           : 'Continue',
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 16),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),

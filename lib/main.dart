@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/features/challange_one/home_screen/home_screen.dart';
 import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
-import 'package:flutter_animations/features/challange_one/onboarding_screens/onboarding_one.dart';
+import 'package:flutter_animations/features/challange_one/onboarding_screens/onboarding_screen.dart';
 import 'package:flutter_animations/features/challange_one/splash_screen/splash_screen.dart';
 
 void main(){

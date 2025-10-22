@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-          
+                  SizedBox(height: 50,),
                   const Align(
                     alignment: Alignment.bottomCenter,
                     child: Text('Don\'t have an Accout yet ? Register'))
