@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         builder: (context, child) { // SplashScreen(); //OnboardingOne()
-          return HomeScreen();
+          return SplashScreen();
         },
     );
   }

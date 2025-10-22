@@ -7,21 +7,45 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<Offset> circleSlideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    );
+
+    circleSlideAnimation = Tween<Offset>(
+      begin: Offset(0, -1),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.bounceIn));
+
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 62, 169),
       body: Stack(
         children: [
-          Align(
-            alignment: const Alignment(1.2, -1.2),
-            child: Container(
-              height: 200,
-              width: 200,
-              decoration: const BoxDecoration(
-                color: Colors.blueAccent,
-                shape: BoxShape.circle,
+          SlideTransition(
+            position: circleSlideAnimation,
+            child: Align(
+              alignment: const Alignment(1.2, -1.2),
+              child: Container(
+                height: 200,
+                width: 200,
+                decoration: const BoxDecoration(
+                  color: Colors.blueAccent,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),
@@ -57,21 +81,20 @@ class _SplashScreenState extends State<SplashScreen> {
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(18))
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
                   ),
-                  child: const Icon(Icons.access_alarm, size: 40,),
+                  child: const Icon(Icons.access_alarm, size: 40),
                 ),
                 const SizedBox(height: 20),
-                const Text('Fry', style: TextStyle(
-                  fontSize: 30, 
-                  color: Colors.white,
-
-                ),),
+                const Text(
+                  'Fry',
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
                 const SizedBox(height: 15),
-                const Text('Beauty Appointment UI Kit', style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15
-                ),),
+                const Text(
+                  'Beauty Appointment UI Kit',
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
               ],
             ),
           ),
