@@ -163,7 +163,7 @@ class _OnboardingOneState extends State<OnboardingOne> {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                       }
                     },
                     style: ElevatedButton.styleFrom(
