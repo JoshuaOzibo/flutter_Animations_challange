@@ -118,7 +118,7 @@ class _SplashScreenState extends State<SplashScreen>
                 height: 200,
                 width: 200,
                 decoration: const BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: Color.fromARGB(255, 41, 100, 202),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -132,7 +132,7 @@ class _SplashScreenState extends State<SplashScreen>
                 height: 150,
                 width: 150,
                 decoration: const BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: Color.fromARGB(255, 41, 100, 202),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -146,7 +146,7 @@ class _SplashScreenState extends State<SplashScreen>
                 height: 120,
                 width: 120,
                 decoration: const BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: Color.fromARGB(255, 41, 100, 202),
                   shape: BoxShape.circle,
                 ),
               ),

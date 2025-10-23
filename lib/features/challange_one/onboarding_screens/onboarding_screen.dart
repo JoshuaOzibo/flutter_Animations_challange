@@ -201,19 +201,19 @@ class OnboardingData {
       "heading": "Luxury Beauty Redefined",
       "paragraph":
           "Experience the finest in beauty craftsmanship with our curated selection of premium services and world-class professionals.",
-      "image": 'images/cow_image.png',
+      "image": 'images/amir-seilsepour-_hAaFD1ucfk-unsplash.jpg',
     },
     {
       "heading": "Empower Your Natural Beauty",
       "paragraph":
           "Unlock your inner confidence with treatments designed to rejuvenate, refresh, and enhance your natural glow.",
-      "image": 'images/cow_image.png',
+      "image": 'images/oliver-johnson-yH0dth2yEQE-unsplash.jpg',
     },
     {
       "heading": "Your Beauty, Our Passion",
       "paragraph":
           "Join our family of satisfied clients and let our professionals craft the perfect look, just for you.",
-      "image": 'images/cow_image.png',
+      "image": 'images/valeriia-miller-_42NKYROG7g-unsplash.jpg',
     },
   ];
 }
