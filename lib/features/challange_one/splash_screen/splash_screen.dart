@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     listAnimation = List.generate(
       2,
-      (index) => Tween<Offset>(begin: Offset(0, 2), end: Offset.zero).animate(
+      (index) => Tween<Offset>(begin: Offset(0, 1), end: Offset.zero).animate(
         CurvedAnimation(
           parent: listAnimationController,
           curve: Interval(index * (1 / 2), 1),
