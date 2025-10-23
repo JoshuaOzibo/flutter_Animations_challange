@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
+import 'package:flutter_animations/features/challange_one/page_animation/animation.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -166,38 +167,7 @@ class _OnboardingOneState extends State<OnboardingScreen> {
                       } else {
                         Navigator.push(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) {
-                                  return LoginScreen();
-                                },
-                            transitionsBuilder:
-                                (
-                                  context,
-                                  animation,
-                                  secondaryAnimation,
-                                  child,
-                                ) {
-                                  final slideAnimation =
-                                      Tween<Offset>(
-                                        begin: Offset(1, 0),
-                                        end: Offset.zero,
-                                      ).animate(
-                                        CurvedAnimation(
-                                          parent: animation,
-                                          curve: Curves.easeOut,
-                                        ),
-                                      );
-                                  return SlideTransition(
-                                    position: slideAnimation,
-                                    child: child,
-                                  );
-                                },
-
-                            transitionDuration: const Duration(
-                              milliseconds: 1000,
-                            ),
-                          ),
+                          PagesAnimation(route: LoginScreen()),
                         );
                       }
                     },

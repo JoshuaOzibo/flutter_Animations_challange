@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
 import 'package:flutter_animations/features/challange_one/onboarding_screens/onboarding_screen.dart';
+import 'package:flutter_animations/features/challange_one/page_animation/animation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -93,24 +94,7 @@ class _SplashScreenState extends State<SplashScreen>
         Timer(const Duration(milliseconds: 1000), () {
           Navigator.push(
             context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return OnboardingScreen();
-              },
-
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                    final slideAnimation = Tween<Offset>(
-                      begin: Offset(1, 0),
-                      end: Offset.zero,
-                    ).animate(animation);
-                    return SlideTransition(
-                      position: slideAnimation,
-                      child: child,
-                    );
-                  },
-              transitionDuration: const Duration(milliseconds: 1000),
-            ),
+            PagesAnimation(route: OnboardingScreen())
           );
         });
       }
