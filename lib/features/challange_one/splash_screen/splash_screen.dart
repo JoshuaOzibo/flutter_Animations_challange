@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/features/challange_one/login_screen/login_screen.dart';
 import 'package:flutter_animations/features/challange_one/onboarding_screens/onboarding_screen.dart';
 import 'package:flutter_animations/features/challange_one/page_animation/animation.dart';
 
@@ -92,10 +90,7 @@ class _SplashScreenState extends State<SplashScreen>
           isListAnimationCompleted = true;
         });
         Timer(const Duration(milliseconds: 1000), () {
-          Navigator.push(
-            context,
-            PagesAnimation(route: OnboardingScreen())
-          );
+          Navigator.push(context, PagesAnimation(route: OnboardingScreen()));
         });
       }
     });
