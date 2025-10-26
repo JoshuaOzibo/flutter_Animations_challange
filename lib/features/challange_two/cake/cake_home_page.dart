@@ -10,7 +10,11 @@ class CakeHomePage extends StatefulWidget {
 class _CakeHomePageState extends State<CakeHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SafeArea(child: Column(
+        mainAxisSize: MainAxisSize.max,
+      )),
+    );
   }
   
 }
