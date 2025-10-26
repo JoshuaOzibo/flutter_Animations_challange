@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/features/challange_two/cake/widgets/cake_button.dart';
+import 'package:flutter_animations/features/challange_two/cake_data/cake_data.dart';
 
 class CakeHomePage extends StatefulWidget {
   const CakeHomePage({super.key});
@@ -9,6 +10,8 @@ class CakeHomePage extends StatefulWidget {
 }
 
 class _CakeHomePageState extends State<CakeHomePage> {
+  final cakeDataDb = CakeData.cakes;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +45,7 @@ class _CakeHomePageState extends State<CakeHomePage> {
                 child: Image.asset(
                   width: 300,
                   height: 300,
-                  'images/cakes_images/cup_cake_one.webp',
+                  cakeDataDb[0].image,
                 ),
               ),
 
