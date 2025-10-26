@@ -22,7 +22,7 @@ class _CakeHomePageState extends State<CakeHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CakeButton(value: Icon(Icons.access_alarms)),
-          
+
                   Row(
                     spacing: 20,
                     children: [
@@ -32,30 +32,31 @@ class _CakeHomePageState extends State<CakeHomePage> {
                   ),
                 ],
               ),
-          
-              SizedBox(height: 20,),
-          
+
+              SizedBox(height: 20),
+
               CakeButton(value: Text('Choose Your favourite')),
-          
+
               Center(
                 heightFactor: 2,
                 child: Image.asset(
-                width: 300,
-                height: 300,
-                'images/cakes_images/cup_cake_one.webp',
-                )),
-          
-                Spacer(),
-          
+                  width: 300,
+                  height: 300,
+                  'images/cakes_images/cup_cake_one.webp',
+                ),
+              ),
+
+              Spacer(),
+
               Row(
-               spacing: 10,
+                spacing: 10,
                 children: [
                   CakeButton(value: Icon(Icons.arrow_back_ios)),
-          
+
                   Expanded(
                     child: CakeButton(value: Text('Choose Your favourite')),
                   ),
-          
+
                   CakeButton(value: Icon(Icons.arrow_forward_ios)),
                 ],
               ),

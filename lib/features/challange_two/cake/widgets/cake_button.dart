@@ -13,7 +13,9 @@ class CakeButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
         border: Border.all(width: 1, color: Colors.white10),
       ),
-      child: value,
+      child: Center(
+        child: value,
+      ),
     );
   }
 }
