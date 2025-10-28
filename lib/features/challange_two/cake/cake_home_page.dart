@@ -11,10 +11,12 @@ class CakeHomePage extends StatefulWidget {
 
 class _CakeHomePageState extends State<CakeHomePage> {
   final cakeDataDb = CakeData.cakes;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: cakeDataDb[index].,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -45,7 +47,7 @@ class _CakeHomePageState extends State<CakeHomePage> {
                 child: Image.asset(
                   width: 300,
                   height: 300,
-                  cakeDataDb[0].image,
+                  cakeDataDb[index].image,
                 ),
               ),
 
@@ -55,12 +57,25 @@ class _CakeHomePageState extends State<CakeHomePage> {
                 spacing: 10,
                 children: [
                   CakeButton(value: Icon(Icons.arrow_back_ios)),
-
                   Expanded(
-                    child: CakeButton(value: Text('Choose Your favourite')),
+                    child: CakeButton(value: Text('Select this cake')),
                   ),
 
-                  CakeButton(value: Icon(Icons.arrow_forward_ios)),
+                  GestureDetector(
+                    onTap: () {
+                      if (index >= 6) {
+                        setState(() {
+                          index = 0;
+                        });
+                      } else {
+                        setState(() {
+                          index += 1;
+                        });
+                      }
+                      print(index);
+                    },
+                    child: CakeButton(value: Icon(Icons.arrow_forward_ios)),
+                  ),
                 ],
               ),
             ],
@@ -70,3 +85,42 @@ class _CakeHomePageState extends State<CakeHomePage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+// bool _isLoading = false;
+//   void _handlePaymentStart() {
+//     setState(() => _isLoading = true);
+//   }
+
+//   void _handlePaymentResult(Map<String, dynamic> result) {
+//     setState(() => _isLoading = false);
+
+//     if (result['status'] == 'success') {
+//       widget.onPaymentResult(result);
+//       NovaNotificationOverlay.show(
+//         context: context,
+//         message: 'Payment successful',
+//         type: NovaNotificationType.success,
+//       );
+//     } else if (result['status'] == 'failed' ||
+//         result['status'] == 'cancelled') {
+//       NovaNotificationOverlay.show(
+//         context: context,
+//         message: result['status'] == 'cancelled'
+//             ? 'Payment cancelled'
+//             : 'Payment failed',
+//         type: NovaNotificationType.error,
+//       );
+//     }
+//   }
+
+//   void _handlePaymentError(Object? error) {
+//     print('Payment error: $error');
+//     setState(() => _isLoading = false);
+//   }
