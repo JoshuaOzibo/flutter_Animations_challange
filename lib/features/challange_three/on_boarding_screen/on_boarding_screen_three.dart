@@ -4,54 +4,64 @@ class OnBoardingScreenThree extends StatefulWidget {
   const OnBoardingScreenThree({super.key});
 
   @override
-  State<OnBoardingScreenThree> createState() => _OnBoardingScreenState();
+  State<OnBoardingScreenThree> createState() => _OnBoardingScreenThreeState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreenThree> {
+class _OnBoardingScreenThreeState extends State<OnBoardingScreenThree> {
+  final pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [PageOne(), PageTwo(), PageThree()];
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 21, 6),
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              height: 150,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: const Color.fromARGB(255, 234, 147, 48),
+      backgroundColor: Colors.brown,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text('Hello'),
+            Expanded(
+              child: PageView.builder(
+                controller: pageController,
+                itemCount: pages.length,
+                allowImplicitScrolling: true,
+                itemBuilder: (_, index) {
+                  return pages[index];
+                },
               ),
             ),
-          ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromARGB(255, 234, 147, 48),
-                ),
-                child: Text('Hello'),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              margin: EdgeInsets.only(right: 100),
-              height: 150,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: const Color.fromARGB(255, 234, 147, 48),
-              ),
-            ),
-          ),
-        ],
+            Text('Hello'),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class PageOne extends StatelessWidget {
+  const PageOne({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class PageTwo extends StatelessWidget {
+  const PageTwo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+class PageThree extends StatelessWidget {
+  const PageThree({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
