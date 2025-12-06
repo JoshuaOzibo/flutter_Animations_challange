@@ -9,31 +9,62 @@ class OnBoardingScreenThree extends StatefulWidget {
 
 class _OnBoardingScreenThreeState extends State<OnBoardingScreenThree> {
   final pageController = PageController();
+  List<Widget> pages = [PageOne(), PageTwo(), PageThree()];
+  int currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [PageOne(), PageTwo(), PageThree()];
-
+    print('currentPage: $currentPage');
     return Scaffold(
       backgroundColor: Colors.brown,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Text('Hello'),
-            Expanded(
-              child: PageView.builder(
-                controller: pageController,
-                itemCount: pages.length,
-                allowImplicitScrolling: true,
-                itemBuilder: (_, index) {
-                  return pages[index];
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text('Hello'),
+              SizedBox(height: 30),
+              Expanded(
+                child: PageView.builder(
+                  onPageChanged: (value) {
+                    setState(() {
+                      currentPage = value;
+                    });
+                    // print(currentPage);
+                    // print(value);
+                  },
+                  controller: pageController,
+                  itemCount: pages.length,
+                  allowImplicitScrolling: true,
+                  itemBuilder: (_, index) {
+                    return pages[index];
+                  },
+                ),
+              ),
+              SizedBox(height: 30),
+              MaterialButton(
+                hoverElevation: 0,
+                color: const Color.fromARGB(255, 73, 41, 30),
+                padding: EdgeInsets.symmetric(vertical: 12),
+                minWidth: double.infinity,
+                child: Text(
+                  currentPage == pages.length - 1 ? 'Get started' : 'Continue',
+                ),
+                onPressed: () {
+                  if (currentPage == pages.length - 1) {
+                    print('Hello');
+                  } else {
+                    pageController.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  }
                 },
               ),
-            ),
-            Text('Hello'),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -57,6 +88,7 @@ class PageTwo extends StatelessWidget {
     return const Placeholder();
   }
 }
+
 class PageThree extends StatelessWidget {
   const PageThree({super.key});
 
