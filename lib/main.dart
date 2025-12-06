@@ -5,6 +5,7 @@ import 'package:flutter_animations/features/challange_one/onboarding_screens/onb
 import 'package:flutter_animations/features/challange_one/splash_screen/splash_screen.dart';
 import 'package:flutter_animations/features/challange_three/on_boarding_screen/on_boarding_screen_three.dart';
 import 'package:flutter_animations/features/challange_two/cake/cake_home_page.dart';
+import 'package:flutter_animations/features/challange_two/swiping/DrinkSwiper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: OnBoardingScreenThree());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: DrinkSwiper());
   }
 }
