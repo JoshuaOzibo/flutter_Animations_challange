@@ -41,19 +41,45 @@ class _DrinkSwiperState extends State<DrinkSwiper> {
     },
   ];
 
+  late Color backgroundColor;
+
+  @override
+  void initState() {
+    super.initState();
+    backgroundColor = drinks[0]["bgColor"] as Color;
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // Static background color
-          Container(
-            color: drinks[0]["bgColor"] as Color?,
+          AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            color: Gradient.lerp(
+              LinearGradient(
+                colors: [backgroundColor.withOpacity(0.7), Colors.white],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              LinearGradient(
+                colors: [backgroundColor.withOpacity(0.4), Colors.white],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              0.5,
+            )!.colors.first,
           ),
           PageView.builder(
             controller: _controller,
             itemCount: drinks.length,
+            onPageChanged: (index) {
+              setState(() {
+                backgroundColor = drinks[index]["bgColor"] as Color;
+              });
+            },
             itemBuilder: (context, index) {
               return AnimatedBuilder(
                 animation: _controller,
@@ -62,7 +88,7 @@ class _DrinkSwiperState extends State<DrinkSwiper> {
 
                   if (_controller.position.haveDimensions) {
                     value = (_controller.page! - index);
-                    value = (1 - (value.abs() * 0.8)).clamp(0.0, 1.0);
+                    value = (1 - (value.abs() * 0.9)).clamp(0.0, 1.0);
                   }
 
                   return Center(
@@ -91,33 +117,21 @@ class DrinkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 30),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
-          gradient: LinearGradient(
-            colors: [
-              data["bgColor"].withOpacity(0.4),
-              Colors.white,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        // margin: EdgeInsets.symmetric(horizontal: 20,),
         child: Stack(
           children: [
-            // Static semi-circle background decoration
-            Positioned(
-              top: 80,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 160,
-                decoration: BoxDecoration(
-                  color: data["bgColor"].withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(120),
-                ),
-              ),
-            ),
+            // Positioned(
+            //   top: 80,
+            //   left: 0,
+            //   right: 0,
+            //   child: Container(
+            //     height: 160,
+            //     decoration: BoxDecoration(
+            //       color: data["bgColor"].withOpacity(0.3),
+            //       borderRadius: BorderRadius.circular(120),
+            //     ),
+            //   ),
+            // ),
 
             // Moving drink image
             Align(
